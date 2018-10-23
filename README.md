@@ -2,14 +2,16 @@
 
 [![npm version](https://badge.fury.io/js/vue-date-fns.svg)](https://www.npmjs.com/package/vue-date-fns)
 
-The `format` function from [date-fns](https://date-fns.org/) available as a filter for Vue apps. Why date-fns and not moment? There are few [articles](https://medium.com/@k2u4yt/momentjs-vs-date-fns-6bddc7bfa21e) [covering](https://hackernoon.com/why-you-should-choose-date-fns-over-moment-js-in-your-nodejs-applications-116d1a709c43) [that](https://github.com/you-dont-need/You-Dont-Need-Momentjs).
+The `format` function from [date-fns](https://date-fns.org/) available as a filter for Vue apps. Why date-fns and not moment? There are already few [articles](https://medium.com/@k2u4yt/momentjs-vs-date-fns-6bddc7bfa21e) [covering](https://hackernoon.com/why-you-should-choose-date-fns-over-moment-js-in-your-nodejs-applications-116d1a709c43) [that](https://github.com/you-dont-need/You-Dont-Need-Momentjs).
 
 ## Installation
 
 ```sh
 npm install vue-date-fns --save
 ```
+
 or
+
 ```sh
 yarn add vue-date-fns
 ```
@@ -19,7 +21,9 @@ yarn add vue-date-fns
 ### Filter in individual component
 
 You can use filter directly in your component.
+
 ```js
+// my-component.js
 import { dateFilter } from "vue-date-fns";
 
 export default {
@@ -28,7 +32,9 @@ export default {
     }
 }
 ```
+
 ```html
+<!-- my-component.vue -->
 <template>
     <div>Now: {{ new Date() | date }}</div>
 </template>
@@ -44,7 +50,9 @@ import { dateFilter } from "vue-date-fns";
 
 Vue.filter("date", dateFilter);
 ```
+
 ```html
+<!-- my-component.vue -->
 <template>
     <div>Now: {{ new Date() | date }}</div>
 </template>
@@ -53,12 +61,14 @@ Vue.filter("date", dateFilter);
 ### Global filter and mixin
 
 You can also use the filter as a mixin if you install the entire plugin.
+
 ```js
 // main.js
 import VueDateFns from "vue-date-fns";
 
 Vue.use(VueDateFns);
 ```
+
 ```js
 // my-component.js
 export default {
@@ -69,14 +79,15 @@ export default {
     }
 }
 ```
+
 ```html
+<!-- my-component.vue -->
 <template>
     <div>
         <div>Now: {{ now }}</div>
         <div>Now: {{ new Date() | date }}</div>
         <div>Now: {{ $date(new Date()) }}</div>
     </div>
-
 </template>
 ```
 
@@ -89,6 +100,7 @@ The filter and mixin support the same arguments as the original `format` functio
 So you can do this:
 
 ```html
+<!-- my-component.vue -->
 <template>
     <div>
         <div>Now: {{ new Date() | date('DD MMMM YYYY') }}</div>
@@ -121,6 +133,7 @@ The default date format and default locale options are the same as for the origi
 Instead of importing the `dateFilter`, import `createDateFilter` factory function and use it for creating the dateFilter with your own defaults:
 
 ```js
+// my-component.js
 import { createDateFilter } from "vue-date-fns";
 import locale from "date-fns/locale/sk";
 
@@ -136,7 +149,7 @@ export default {
 Instead of importing the `dateFilter`, import `createDateFilter` factory function and use it for creating the dateFilter with your own defaults:
 
 ```js
-
+// main.js
 import { createDateFilter } from "vue-date-fns";
 import locale from "date-fns/locale/sk";
 
