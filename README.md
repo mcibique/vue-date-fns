@@ -1,6 +1,7 @@
 # Date filter for Vue based on [date-fns](https://date-fns.org/)
 
-[![npm version](https://badge.fury.io/js/vue-date-fns.svg)](https://www.npmjs.com/package/vue-date-fns)
+[![npm version](https://badgen.net/npm/v/vue-date-fns)](https://www.npmjs.com/package/vue-date-fns)
+[![minzipped size](https://badgen.net/bundlephobia/minzip/vue-date-fns)](https://bundlephobia.com/result?p=vue-date-fns)
 
 The `format` function from [date-fns](https://date-fns.org/) available as a filter for Vue apps. Why date-fns and not moment? There are already few [articles](https://medium.com/@k2u4yt/momentjs-vs-date-fns-6bddc7bfa21e) [covering](https://hackernoon.com/why-you-should-choose-date-fns-over-moment-js-in-your-nodejs-applications-116d1a709c43) [that](https://github.com/you-dont-need/You-Dont-Need-Momentjs).
 
