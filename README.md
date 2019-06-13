@@ -21,6 +21,8 @@ or
 yarn add vue-date-fns
 ```
 
+`vue-date-fns` depends on `date-fns` version 1.
+
 ## Usage
 
 ### Filter in individual component
@@ -170,4 +172,26 @@ Pass the new defaults as other parameters to the `.use()` call. The defaults are
 import VueDateFns from "vue-date-fns";
 
 Vue.use(VueDateFns, "DD MMMM YYYY", { locale });
+```
+
+## Customize the global filter name
+
+If you want to change the global name of the filter and mixin, pass the fourth argument into the `.use()` call. If the value is falsy, it defaults to `"date"`.
+
+```js
+// main.js
+import VueDateFns from "vue-date-fns";
+
+Vue.use(VueDateFns, /* custom format */, /* custom options */, "myDateFilter");
+```
+
+```html
+<!-- my-component.vue -->
+<template>
+    <div>
+        <div>Now: {{ new Date() | myDateFilter }}</div>
+        <div>Now: {{ new Date() | myDateFilter('DD MMMM YYYY') }}</div>
+        <div>Now: {{ $myDateFilter(new Date(), 'DD MMMM YYYY') }}</div>
+    </div>
+</template>
 ```

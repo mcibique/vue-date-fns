@@ -9,16 +9,16 @@ function createDateFilter (defaultFormat, defaultOptions) {
   };
 }
 
-function install (Vue, defaultFormat, defaultOptions) {
+function install (Vue, defaultFormat, defaultOptions, globalFilterName) {
   var dateFilter = createDateFilter(defaultFormat, defaultOptions);
+  globalFilterName = globalFilterName || "date";
 
-  Vue.filter("date", dateFilter);
+  Vue.filter(globalFilterName, dateFilter);
 
-  Vue.mixin({
-    methods: {
-      $date: dateFilter,
-    },
-  });
+  var methods = {};
+  methods["$" + globalFilterName] = dateFilter;
+
+  Vue.mixin({ methods: methods });
 }
 
 module.exports = install;
