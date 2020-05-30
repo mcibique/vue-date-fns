@@ -6,7 +6,7 @@ let expect = require("chai").expect;
 let { mount, createLocalVue } = require("@vue/test-utils");
 
 let DateFnsPlugin = require(".");
-let { dateFilter, createDateFilter } = DateFnsPlugin;
+let { dateFilter, createDateFilter, DEFAULT_DATE_FORMAT } = DateFnsPlugin;
 
 describe("using filter in component", function () {
   describe("without any options", function () {
@@ -28,14 +28,14 @@ describe("using filter in component", function () {
       let wrapper = mount(Wrapper);
       let text = wrapper.find("p").text();
       expect(text).to.be.ok;
-      expect(text).to.equal(formatDate(date));
+      expect(text).to.equal(formatDate(date, DEFAULT_DATE_FORMAT));
     });
   });
 
   describe("with custom format", function () {
     it("should use the filter and produce the same output as date-fns", function () {
       let date = new Date();
-      let customFormat = "DD MMMM YYYY";
+      let customFormat = "dd MMMM yyyy";
 
       let Wrapper = Vue.extend({
         template: `<p>{{ myDate | date('${customFormat}') }}</p>`,
@@ -59,7 +59,7 @@ describe("using filter in component", function () {
   describe("with custom format and options", function () {
     it("should use the filter and produce the same output as date-fns", function () {
       let date = new Date();
-      let customFormat = "DD MMMM YYYY";
+      let customFormat = "dd MMMM yyyy";
       let locale = require("date-fns/locale/sk");
 
       let Wrapper = Vue.extend({
@@ -85,7 +85,7 @@ describe("using filter in component", function () {
   describe("creating own filter with custom format", function () {
     it("should use the filter and produce the same output as date-fns", function () {
       let date = new Date();
-      let customFormat = "DD MMMM YYYY";
+      let customFormat = "dd MMMM yyyy";
 
       let Wrapper = Vue.extend({
         template: "<p>{{ myDate | date }}</p>",
@@ -109,7 +109,7 @@ describe("using filter in component", function () {
   describe("creating own filter with custom format and custom defaults", function () {
     it("should use the filter and produce the same output as date-fns", function () {
       let date = new Date();
-      let customFormat = "DD MMMM YYYY";
+      let customFormat = "dd MMMM yyyy";
       let locale = require("date-fns/locale/sk");
 
       let Wrapper = Vue.extend({
@@ -160,14 +160,14 @@ describe("using global filter", function () {
       let wrapper = mount(Wrapper, { localVue });
       let text = wrapper.find("p").text();
       expect(text).to.be.ok;
-      expect(text).to.equal(formatDate(date));
+      expect(text).to.equal(formatDate(date, DEFAULT_DATE_FORMAT));
     });
   });
 
   describe("with custom format", function () {
     it("should use the filter and produce the same output as date-fns", function () {
       let date = new Date();
-      let customFormat = "DD MMMM YYYY";
+      let customFormat = "dd MMMM yyyy";
 
       let Wrapper = localVue.extend({
         template: `<p>{{ myDate | date('${customFormat}') }}</p>`,
@@ -188,7 +188,7 @@ describe("using global filter", function () {
   describe("with custom format and options", function () {
     it("should use the filter and produce the same output as date-fns", function () {
       let date = new Date();
-      let customFormat = "DD MMMM YYYY";
+      let customFormat = "dd MMMM yyyy";
       let locale = require("date-fns/locale/sk");
 
       let Wrapper = localVue.extend({
@@ -211,7 +211,7 @@ describe("using global filter", function () {
 
 describe("using global filter with custom format", function () {
   let localVue;
-  let customFormat = "DD MMMM YYYY";
+  let customFormat = "dd MMMM yyyy";
 
   beforeEach(function () {
     localVue = createLocalVue();
@@ -245,7 +245,7 @@ describe("using global filter with custom format", function () {
   describe("with custom format", function () {
     it("should use the filter and produce the same output as date-fns", function () {
       let date = new Date();
-      let differentCustomFormat = "DD MMMM YYYY HH:mm";
+      let differentCustomFormat = "dd MMMM yyyy HH:mm";
 
       let Wrapper = localVue.extend({
         template: `<p>{{ myDate | date('${differentCustomFormat}') }}</p>`,
@@ -266,7 +266,7 @@ describe("using global filter with custom format", function () {
   describe("with custom format and options", function () {
     it("should use the filter and produce the same output as date-fns", function () {
       let date = new Date();
-      let differentCustomFormat = "DD MMMM YYYY HH:mm";
+      let differentCustomFormat = "dd MMMM yyyy HH:mm";
       let locale = require("date-fns/locale/sk");
 
       let Wrapper = localVue.extend({
@@ -289,8 +289,8 @@ describe("using global filter with custom format", function () {
 
 describe("using global filter with custom format and custom defaults", function () {
   let localVue;
-  let customFormat = "DD MMMM YYYY";
-  let locale = require("date-fns/locale/ar");
+  let customFormat = "dd MMMM yyyy";
+  let locale = require("date-fns/locale/ar-SA");
 
   beforeEach(function () {
     localVue = createLocalVue();
@@ -324,7 +324,7 @@ describe("using global filter with custom format and custom defaults", function 
   describe("with custom format", function () {
     it("should use the filter and produce the same output as date-fns", function () {
       let date = new Date();
-      let differentCustomFormat = "DD MMMM YYYY HH:mm";
+      let differentCustomFormat = "dd MMMM yyyy HH:mm";
 
       let Wrapper = localVue.extend({
         template: `<p>{{ myDate | date('${differentCustomFormat}') }}</p>`,
@@ -345,7 +345,7 @@ describe("using global filter with custom format and custom defaults", function 
   describe("with custom format and options", function () {
     it("should use the filter and produce the same output as date-fns", function () {
       let date = new Date();
-      let differentCustomFormat = "DD MMMM YYYY HH:mm";
+      let differentCustomFormat = "dd MMMM yyyy HH:mm";
       let differentLocale = require("date-fns/locale/sk");
 
       let Wrapper = localVue.extend({
@@ -397,7 +397,7 @@ describe("using global filter with custom filter name", function () {
     let wrapper = mount(Wrapper, { localVue });
     let text = wrapper.find("p").text();
     expect(text).to.be.ok;
-    expect(text).to.equal(formatDate(date));
+    expect(text).to.equal(formatDate(date, DEFAULT_DATE_FORMAT));
   });
 });
 
@@ -430,14 +430,14 @@ describe("using mixin", function () {
       let wrapper = mount(Wrapper, { localVue });
       let text = wrapper.find("p").text();
       expect(text).to.be.ok;
-      expect(text).to.equal(formatDate(date));
+      expect(text).to.equal(formatDate(date, DEFAULT_DATE_FORMAT));
     });
   });
 
   describe("with custom format", function () {
     it("should use mixin and produce the same output as date-fns", function () {
       let date = new Date();
-      let customFormat = "DD MMMM YYYY HH:mm";
+      let customFormat = "dd MMMM yyyy HH:mm";
 
       let Wrapper = localVue.extend({
         template: `<p>{{ $date(myDate, '${customFormat}') }}</p>`,
@@ -458,7 +458,7 @@ describe("using mixin", function () {
   describe("with custom format and options", function () {
     it("should use the filter and produce the same output as date-fns", function () {
       let date = new Date();
-      let customFormat = "DD MMMM YYYY HH:mm";
+      let customFormat = "dd MMMM yyyy HH:mm";
       let locale = require("date-fns/locale/sk");
 
       let Wrapper = localVue.extend({
@@ -512,7 +512,7 @@ describe("using mixing with custom filter name", function () {
     let wrapper = mount(Wrapper, { localVue });
     let text = wrapper.find("p").text();
     expect(text).to.be.ok;
-    expect(text).to.equal(formatDate(date));
+    expect(text).to.equal(formatDate(date, DEFAULT_DATE_FORMAT));
   });
 });
 

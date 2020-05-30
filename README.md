@@ -21,7 +21,13 @@ or
 yarn add vue-date-fns
 ```
 
-`vue-date-fns` depends on `date-fns` version 1.
+`vue-date-fns` depends on `date-fns` version 2. If you are using the version 1 of `date-fns`, then install `vue-date-fns@1`, which is compatible.
+
+### Breaking changes in version 2
+
+`vue-date-fns@2` inherits all **breaking changes** from `date-fns@2`, because it's just a wrapper around their `format` function. There were major breaking changes in the format API, e.g. `DD MMMM YYYY` should be from now on `dd MMMM yyyy`.
+
+Before upgrading to `date-fns@2` and `vue-date-fns@2`, please check `date-fns` docs for [format function](https://date-fns.org/v2.14.0/docs/format#v2.0.0-breaking-changes), their [blog explaining changes in the format](https://blog.date-fns.org/post/unicode-tokens-in-date-fns-v2-sreatyki91jg/) and their changelog for [common breaking changes](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes) in the `date-fns` library. It is very likely that your existing code will break.
 
 ## Usage
 
@@ -100,9 +106,9 @@ export default {
 
 ## Options
 
-The filter and mixin support the same arguments as the original `format` function (see [docs](https://date-fns.org/v1.29.0/docs/format)):
+The filter and mixin support the same arguments as the original `format` function (see [docs](https://date-fns.org/v2.14.0/docs/format)):
 
-`format(date, [format], [options])`
+`format(date, format, [options])`
 
 So you can do this:
 
@@ -110,8 +116,8 @@ So you can do this:
 <!-- my-component.vue -->
 <template>
     <div>
-        <div>Now: {{ new Date() | date('DD MMMM YYYY') }}</div>
-        <div>Now: {{ $date(new Date(), 'DD MMMM YYYY') }}</div>
+        <div>Now: {{ new Date() | date('dd MMMM yyyy') }}</div>
+        <div>Now: {{ $date(new Date(), 'dd MMMM yyyy') }}</div>
     </div>
 </template>
 ```
@@ -125,7 +131,7 @@ import locale from "date-fns/locale/sk";
 export default {
     computed: {
         now() {
-            return this.$date(new Date(), "DD MMMM YYYY", { locale });
+            return this.$date(new Date(), "dd MMMM yyyy", { locale });
         }
     }
 }
@@ -133,7 +139,7 @@ export default {
 
 ## Overriding default options
 
-The default date format and default locale options are the same as for the original `format` function (see the [docs](https://date-fns.org/v1.29.0/docs/format#arguments)). There is a way how to set your own:
+The default date format and default locale options are the same as for the original `format` function (see the [docs](https://date-fns.org/v2.14.0/docs/format#arguments)). There is a way how to set your own:
 
 ### Filter in individual component
 
@@ -146,7 +152,7 @@ import locale from "date-fns/locale/sk";
 
 export default {
     filters: {
-        date: createDateFilter("DD MMMM YYYY", { locale })
+        date: createDateFilter("dd MMMM yyyy", { locale })
     }
 }
 ```
@@ -160,7 +166,7 @@ Instead of importing the `dateFilter`, import `createDateFilter` factory functio
 import { createDateFilter } from "vue-date-fns";
 import locale from "date-fns/locale/sk";
 
-Vue.filter("date", createDateFilter("DD MMMM YYYY", { locale }));
+Vue.filter("date", createDateFilter("dd MMMM yyyy", { locale }));
 ```
 
 ### Global filter and mixin
@@ -171,7 +177,7 @@ Pass the new defaults as other parameters to the `.use()` call. The defaults are
 // main.js
 import VueDateFns from "vue-date-fns";
 
-Vue.use(VueDateFns, "DD MMMM YYYY", { locale });
+Vue.use(VueDateFns, "dd MMMM yyyy", { locale });
 ```
 
 ## Customize the global filter name
@@ -190,8 +196,14 @@ Vue.use(VueDateFns, /* custom format */, /* custom options */, "myDateFilter");
 <template>
     <div>
         <div>Now: {{ new Date() | myDateFilter }}</div>
-        <div>Now: {{ new Date() | myDateFilter('DD MMMM YYYY') }}</div>
-        <div>Now: {{ $myDateFilter(new Date(), 'DD MMMM YYYY') }}</div>
+        <div>Now: {{ new Date() | myDateFilter('dd MMMM yyyy') }}</div>
+        <div>Now: {{ $myDateFilter(new Date(), 'dd MMMM yyyy') }}</div>
     </div>
 </template>
 ```
+
+## Default date format
+
+If you don't set up any default format for your custom filters, `vue-date-fns` will automatically set it to `yyyy-MM-dd'T'HH:mm:ss.SSSxxx`, following [the migration guide](https://date-fns.org/v2.14.0/docs/format#v2.0.0-breaking-changes) of `date-fns`.
+
+If you would like to change the default format, follow the [Overriding default options](#overriding-default-options) section and create a custom filter with custom defaults.
