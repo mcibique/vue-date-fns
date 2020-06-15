@@ -1,7 +1,7 @@
 /* eslint-env node, mocha */
 
 let Vue = require("vue");
-let formatDate = require("date-fns/format");
+let formatDate = require("date-fns").format;
 let expect = require("chai").expect;
 let { mount, createLocalVue } = require("@vue/test-utils");
 

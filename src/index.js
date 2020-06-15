@@ -1,4 +1,4 @@
-var formatDate = require("date-fns/format");
+var formatDate = require("date-fns").format;
 
 // https://date-fns.org/v2.14.0/docs/format#v2.0.0-breaking-changes
 var DEFAULT_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSxxx";
