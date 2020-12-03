@@ -1,3 +1,4 @@
 .editorconfig
+.eslintrc.js
 test
 src/**/*.spec.js

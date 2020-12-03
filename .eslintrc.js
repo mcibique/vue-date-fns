@@ -6,5 +6,6 @@ module.exports = {
     "no-unused-expressions": "off",
     "comma-dangle": ["error", "always-multiline"],
     "prefer-const": "off",
+    "no-var": "off",
   },
 };
