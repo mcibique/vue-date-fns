@@ -1,6 +1,6 @@
 {
     "name": "vue-date-fns",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "description": "Date filter for Vue 2.X based on the date-fns.",
     "main": "src/index.js",
     "scripts": {
