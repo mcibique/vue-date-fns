@@ -1,4 +1,4 @@
-# Date filter for Vue based on [date-fns](https://date-fns.org/)
+# Date filter for Vue 2.X based on [date-fns](https://date-fns.org/)
 
 [![npm version](https://badgen.net/npm/v/vue-date-fns)](https://www.npmjs.com/package/vue-date-fns)
 [![minzipped size](https://badgen.net/bundlephobia/minzip/vue-date-fns)](https://bundlephobia.com/result?p=vue-date-fns)
@@ -7,7 +7,7 @@ The `format` function from [date-fns](https://date-fns.org/) available as a filt
 
 ## Disclaimer
 
-This package is just a Vue wrapper around `date-fns`. All important (and excellent) stuff is happening inside the `date-fns` library. If you found a bug please report it in their [issue tracker](https://github.com/date-fns/date-fns/issues) or help them and [contribute the PR](https://github.com/date-fns/date-fns/blob/master/CONTRIBUTING.md). If you like their package, [support them](https://opencollective.com/date-fns), because they're doing an amazing job.
+This package is just a Vue 2.X wrapper around `date-fns`. All important (and excellent) stuff is happening inside the `date-fns` library. If you found a bug please report it in their [issue tracker](https://github.com/date-fns/date-fns/issues) or help them and [contribute the PR](https://github.com/date-fns/date-fns/blob/master/CONTRIBUTING.md). If you like their package, [support them](https://opencollective.com/date-fns), because they're doing an amazing job.
 
 ## Installation
 
